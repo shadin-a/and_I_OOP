@@ -5,7 +5,9 @@
   "scripts": {
     "test": "jest"
   },
-  "type": "commonjs"
+  "type": "commonjs",
+  "dependencies": {
+    "inquirer": "8.0.0",
+    "node-fetch": "^2.6.1"
+  }
 }
- 
-
