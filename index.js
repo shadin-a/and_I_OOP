@@ -1,6 +1,7 @@
 const { inheritInnerComments } = require('@babel/types');
 const fs = require('fs');
 const inquirer = require('inquirer');
+const { type } = require('os');
 const { off } = require("process");
 // const manager = require('/Users/shadinalarab/2022 BOOTCAMP/DEVELOP_MODULE10/module10_and_I_OOP/lib/manager.js');
 // const intern = require('/Users/shadinalarab/2022 BOOTCAMP/DEVELOP_MODULE10/module10_and_I_OOP/lib/intern.js');
@@ -91,37 +92,40 @@ const engineerQuestions = [
 
 },]
 //INQUIRER PROMPT FOR MANAGER :
-function getManagerData (){
+const getManagerData = async () => {
 inquirer.prompt(managerQuestions)
   .then(answers => {
-    console.table(answers);
+    console.log(answers);
+    nextStep();
 })
-nextStep();
 }
 //INQUIRER PROMPT FOR INTERN
-function getInternData (){
+const getInternData = () => {
   inquirer.prompt(internQuestions)
     .then(answers => {
-      console.table(answers);
+      console.log(answers);
+      //take the data and make a card function goes here
+      nextStep();
   })
-  nextStep();
   }
 
 //INQUIRER PROMPT FOR ENGINEER
-function getEngineerData (){
+const getEngineerData = () => {
   inquirer.prompt(engineerQuestions)
     .then(answers => {
-      console.table(answers);
+      console.log(answers);
+      nextStep();
+      //take the data and make a card function goes here
   })
-  nextStep();
   }
 
 //INQUIRER PROMPT FOR TRANSITORY QUESTION
-function nextStep (){
+const nextStep = () => {
   inquirer.prompt(nextStepQuestions)
     .then(answers => {
       console.log(answers);
-      switch(answers.menu) {
+      console.log(typeof answers);
+      switch(answers['nextStep']) {
         case "Intern":    
             return getInternData();
 
@@ -129,7 +133,7 @@ function nextStep (){
             return getEngineerData();
 
         case "I'm done!":
-            console.log("the user has ended the app");
+            console.log("Team assembled!");
       }
           })
 }
