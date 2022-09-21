@@ -1,11 +1,10 @@
 const { inheritInnerComments } = require('@babel/types');
 const fs = require('fs');
 const inquirer = require('inquirer');
-const { type } = require('os');
-const { off } = require("process");
-// const manager = require('/Users/shadinalarab/2022 BOOTCAMP/DEVELOP_MODULE10/module10_and_I_OOP/lib/manager.js');
-// const intern = require('/Users/shadinalarab/2022 BOOTCAMP/DEVELOP_MODULE10/module10_and_I_OOP/lib/intern.js');
-// const engineer = require('/Users/shadinalarab/2022 BOOTCAMP/DEVELOP_MODULE10/module10_and_I_OOP/lib/engineer.js');
+const Manager = require('/Users/shadinalarab/2022 BOOTCAMP/DEVELOP_MODULE10/module10_and_I_OOP/lib/manager.js');
+const Intern = require('/Users/shadinalarab/2022 BOOTCAMP/DEVELOP_MODULE10/module10_and_I_OOP/lib/intern.js');
+const Engineer = require('/Users/shadinalarab/2022 BOOTCAMP/DEVELOP_MODULE10/module10_and_I_OOP/lib/engineer.js');
+const teamCards = [];
 
 //FUNCTION TO CREATE FILE
 function writeToFile(fileName, html) {
@@ -97,6 +96,7 @@ inquirer.prompt(managerQuestions)
   .then(answers => {
     console.log(answers);
     nextStep();
+    generateManagerCard();
 })
 }
 //INQUIRER PROMPT FOR INTERN
@@ -137,6 +137,33 @@ const nextStep = () => {
       }
           })
 }
+
+//FUNCTION TO CREATE MANAGER CARD 
+function generateManagerCard (answers){
+  let name = answers.name;
+  let id = answers.id;
+  let email = answers.email;
+  let officeNumber = answers.officeNumber;
+  const manager = new Manager(name, id, email, officeNumber);
+  console.log("a manager is born!")
+
+  const generateManagerHTML = `
+  <div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">${manager.getName()}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">${manager.getRole()}</h6>
+    <p class="card-text">ID: ${manager.getID()} </p>
+    <p class="card-text">Office: ${manager.getOfficeNumber()}</p>
+    <a href="#" class="card-link">Card link</a>
+    <a href="mailto${manager.getEmail()}" class="card-link">${manager.getEmail()}</a>
+  </div>
+</div>`;
+  teamCards.push(generateManagerHTML);
+}
+//FUNCTION TO CREATE INTERN CARD 
+
+//FUNCTION TO CREATE ENGINEER CARD 
+
 
 //FUNCTION TO INITIALIZE APP
 function init(){
