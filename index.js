@@ -121,7 +121,7 @@ const getEngineerData = () => {
       console.log(answers);
       //take the data and make a card function here
       const engineer = new Engineer(answers.id, answers.email, answers.name, answers.github);
-      generateInternCard(engineer)
+      generateEngineerCard(engineer)
       nextStep();
   })
   }
