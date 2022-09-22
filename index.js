@@ -9,8 +9,10 @@ var teamCards = [];
 
 
 //FUNCTION TO CREATE FILE
-function writeToFile(fileName, html) {
-  fs.writeFile(filename, html, err => {
+function writeToFile(filePath, content) {
+  var existingHeader = fs.readFileSync(filePath, 'utf8');
+  var stuffToWrite = existingHeader + content;
+  fs.writeFile(filePath, stuffToWrite, err => {
       if (err) {
         console.error(err);
       } else {
@@ -112,7 +114,7 @@ const getInternData = () => {
       generateInternCard(intern)
       nextStep();
   })
-  }
+}
 
 //INQUIRER PROMPT FOR ENGINEER
 const getEngineerData = () => {
@@ -141,6 +143,7 @@ const nextStep = () => {
         case "I'm done!":
           console.log("Team assembled!");
           console.log(teamCards);
+          writeToFile('teamCards.html', teamCards.join(""));
       }
   })
 }
@@ -178,7 +181,6 @@ function generateInternCard(intern) {
 //FUNCTION TO INITIALIZE APP
 function init() {
   getManagerData();
-  //writeToFile(filename, html);
 };
 
 //START THE APP!
