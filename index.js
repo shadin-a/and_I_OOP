@@ -169,7 +169,14 @@ function generateManagerCard(manager) {
 //FUNCTION TO CREATE INTERN CARD 
 function generateInternCard(intern) {
   console.log("intern: ", intern.getName());
-  generatedInternHTML =  `<h5 class="card-title">${intern.getName()}</h5>`;
+  generatedInternHTML =  `
+  <div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">${intern.getName()}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">${intern.getRole()}</h6>
+    <p class="card-text">ID: ${intern.getID()} </p>
+    <p class="card-text">School: ${intern.getSchool()}</p>
+  </div>`
   teamCards.push(generatedInternHTML);
 }
 
