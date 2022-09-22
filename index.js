@@ -11,7 +11,7 @@ var teamCards = [];
 //FUNCTION TO CREATE FILE
 function writeToFile(filePath, content) {
   var existingHeader = fs.readFileSync(filePath, 'utf8');
-  var stuffToWrite = existingHeader + content;
+  var stuffToWrite = existingHeader + content + '</body></html>';
   fs.writeFile(filePath, stuffToWrite, err => {
       if (err) {
         console.error(err);
@@ -107,10 +107,8 @@ inquirer.prompt(managerQuestions)
 const getInternData = () => {
   inquirer.prompt(internQuestions)
     .then(internAnswers => {
-      console.log(internAnswers);
       //take the data and make a card function goes here DONT FORGET TO PASS IN ANSWERS
       const intern = new Intern(internAnswers.id, internAnswers.email, internAnswers.name, internAnswers.school);
-      console.log('about to generate intenr stuff...');
       generateInternCard(intern)
       nextStep();
   })
@@ -121,8 +119,9 @@ const getEngineerData = () => {
   inquirer.prompt(engineerQuestions)
     .then(answers => {
       console.log(answers);
-
-      //take the data and make a card function goes here DONT FORGET TO PASS IN ANSWERS
+      //take the data and make a card function here
+      const engineer = new Engineer(answers.id, answers.email, answers.name, answers.github);
+      generateInternCard(engineer)
       nextStep();
   })
   }
@@ -150,9 +149,6 @@ const nextStep = () => {
 
 //FUNCTION TO CREATE MANAGER CARD 
 function generateManagerCard(manager) {
-
-  console.log("a manager is born!")
-
   const generatedManagerHTML = `
   <div class="card" style="width: 18rem;">
   <div class="card-body">
@@ -160,15 +156,14 @@ function generateManagerCard(manager) {
     <h6 class="card-subtitle mb-2 text-muted">${manager.getRole()}</h6>
     <p class="card-text">ID: ${manager.getID()} </p>
     <p class="card-text">Office: ${manager.getOfficeNumber()}</p>
-    <a href="#" class="card-link">Card link</a>
     <a href="mailto${manager.getEmail()}" class="card-link">${manager.getEmail()}</a>
   </div>
 </div>`;
   teamCards.push(generatedManagerHTML);
 }
+
 //FUNCTION TO CREATE INTERN CARD 
 function generateInternCard(intern) {
-  console.log("intern: ", intern.getName());
   generatedInternHTML =  `
   <div class="card" style="width: 18rem;">
   <div class="card-body">
@@ -176,12 +171,24 @@ function generateInternCard(intern) {
     <h6 class="card-subtitle mb-2 text-muted">${intern.getRole()}</h6>
     <p class="card-text">ID: ${intern.getID()} </p>
     <p class="card-text">School: ${intern.getSchool()}</p>
+    <a href="mailto${intern.getEmail()}" class="card-link">${intern.getEmail()}</a>
   </div>`
   teamCards.push(generatedInternHTML);
 }
 
 //FUNCTION TO CREATE ENGINEER CARD 
-
+function generateEngineerCard(engineer) {
+  generatedEngineerHTML =  `
+  <div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">${engineer.getName()}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">${engineer.getRole()}</h6>
+    <p class="card-text">ID: ${engineer.getID()} </p>
+    <p class="card-text">Github: github.com/${engineer.getGithub()}</p>
+    <a href="mailto${engineer.getEmail()}" class="card-link">${engineer.getEmail()}</a>
+  </div>`
+  teamCards.push(generatedEngineerHTML);
+}
 
 
 
