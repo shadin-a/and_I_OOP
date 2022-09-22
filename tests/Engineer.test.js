@@ -13,7 +13,7 @@ describe("getGithub", () => {
 //TEST FOR ROLE OVERRIDE
 describe('getRole', () => {
     it('should overide the Employee role', () => {
-        expect(radar.role).toEqual('Engineer')
+        expect(radar.getRole()).toEqual('Engineer')
     })
 });
 })

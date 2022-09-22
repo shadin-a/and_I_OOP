@@ -13,7 +13,7 @@ describe("getSchool", () => {
 //TEST FOR ROLE OVERRIDE
 describe('getRole', () => {
     it('should overide the Employee role', () => {
-        expect(leeroy.role).toEqual('Intern')
+        expect(leeroy.getRole()).toEqual('Intern')
     })
 });
 })
