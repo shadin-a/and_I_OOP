@@ -96,7 +96,6 @@ inquirer.prompt(managerQuestions)
   .then(answers => {
     console.log(answers);
     nextStep();
-    generateManagerCard();
 })
 }
 //INQUIRER PROMPT FOR INTERN
@@ -133,13 +132,15 @@ const nextStep = () => {
             return getEngineerData();
 
         case "I'm done!":
+            generateHTML();
             console.log("Team assembled!");
+
       }
-          })
+    })
 }
 
 //FUNCTION TO CREATE MANAGER CARD 
-function generateManagerCard (answers){
+function generateManagerCard(answers) {
   let name = answers.name;
   let id = answers.id;
   let email = answers.email;
@@ -166,9 +167,18 @@ function generateManagerCard (answers){
 
 
 //FUNCTION TO INITIALIZE APP
-function init(){
+function init() {
   getManagerData();
   //writeToFile(filename, html);
+  var managerData = getManagerData();
+  nextStep()
+  var engData = getEngineerData();
+  nextStep();
+  var internData = getInternData();
+
+  allHtml = [];
+  managerHtml = generateManagerHTML(managerData);
+  allHtml.append(managerHtml);
 };
 
 //START THE APP!
