@@ -5,6 +5,11 @@ const Manager = require('/Users/shadinalarab/2022 BOOTCAMP/DEVELOP_MODULE10/modu
 const Intern = require('/Users/shadinalarab/2022 BOOTCAMP/DEVELOP_MODULE10/module10_and_I_OOP/lib/intern.js');
 const Engineer = require('/Users/shadinalarab/2022 BOOTCAMP/DEVELOP_MODULE10/module10_and_I_OOP/lib/engineer.js');
 const teamCards = [];
+var managerData = null;
+var internData = [];
+var engData = []; 
+
+
 
 //FUNCTION TO CREATE FILE
 function writeToFile(fileName, html) {
@@ -94,8 +99,8 @@ const engineerQuestions = [
 const getManagerData = async () => {
 inquirer.prompt(managerQuestions)
   .then(answers => {
-    console.log(answers);
     nextStep();
+    generateManagerCard(answers);
 })
 }
 //INQUIRER PROMPT FOR INTERN
@@ -103,7 +108,7 @@ const getInternData = () => {
   inquirer.prompt(internQuestions)
     .then(answers => {
       console.log(answers);
-      //take the data and make a card function goes here
+      //take the data and make a card function goes here DONT FORGET TO PASS IN ANSWERS
       nextStep();
   })
   }
@@ -114,7 +119,7 @@ const getEngineerData = () => {
     .then(answers => {
       console.log(answers);
       nextStep();
-      //take the data and make a card function goes here
+      //take the data and make a card function goes here DONT FORGET TO PASS IN ANSWERS
   })
   }
 
@@ -132,11 +137,9 @@ const nextStep = () => {
             return getEngineerData();
 
         case "I'm done!":
-            generateHTML();
             console.log("Team assembled!");
-
       }
-    })
+  })
 }
 
 //FUNCTION TO CREATE MANAGER CARD 
@@ -148,7 +151,7 @@ function generateManagerCard(answers) {
   const manager = new Manager(name, id, email, officeNumber);
   console.log("a manager is born!")
 
-  const generateManagerHTML = `
+  const generatedManagerHTML = `
   <div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">${manager.getName()}</h5>
@@ -159,7 +162,8 @@ function generateManagerCard(answers) {
     <a href="mailto${manager.getEmail()}" class="card-link">${manager.getEmail()}</a>
   </div>
 </div>`;
-  teamCards.push(generateManagerHTML);
+  teamCards.push(generatedManagerHTML);
+  console.log(teamCards);
 }
 //FUNCTION TO CREATE INTERN CARD 
 
@@ -170,15 +174,6 @@ function generateManagerCard(answers) {
 function init() {
   getManagerData();
   //writeToFile(filename, html);
-  var managerData = getManagerData();
-  nextStep()
-  var engData = getEngineerData();
-  nextStep();
-  var internData = getInternData();
-
-  allHtml = [];
-  managerHtml = generateManagerHTML(managerData);
-  allHtml.append(managerHtml);
 };
 
 //START THE APP!
