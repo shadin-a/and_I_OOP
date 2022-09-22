@@ -4,10 +4,7 @@ const inquirer = require('inquirer');
 const Manager = require('/Users/shadinalarab/2022 BOOTCAMP/DEVELOP_MODULE10/module10_and_I_OOP/lib/manager.js');
 const Intern = require('/Users/shadinalarab/2022 BOOTCAMP/DEVELOP_MODULE10/module10_and_I_OOP/lib/intern.js');
 const Engineer = require('/Users/shadinalarab/2022 BOOTCAMP/DEVELOP_MODULE10/module10_and_I_OOP/lib/engineer.js');
-const teamCards = [];
-var managerData = null;
-var internData = [];
-var engData = []; 
+var teamCards = [];
 
 
 
@@ -99,16 +96,20 @@ const engineerQuestions = [
 const getManagerData = async () => {
 inquirer.prompt(managerQuestions)
   .then(answers => {
+    const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
+    generateManagerCard(manager);
     nextStep();
-    generateManagerCard(answers);
 })
 }
 //INQUIRER PROMPT FOR INTERN
 const getInternData = () => {
   inquirer.prompt(internQuestions)
-    .then(answers => {
-      console.log(answers);
+    .then(internAnswers => {
+      console.log(internAnswers);
       //take the data and make a card function goes here DONT FORGET TO PASS IN ANSWERS
+      const intern = new Intern(internAnswers.id, internAnswers.email, internAnswers.name, internAnswers.school);
+      console.log('about to generate intenr stuff...');
+      generateInternCard(intern)
       nextStep();
   })
   }
@@ -118,8 +119,9 @@ const getEngineerData = () => {
   inquirer.prompt(engineerQuestions)
     .then(answers => {
       console.log(answers);
-      nextStep();
+
       //take the data and make a card function goes here DONT FORGET TO PASS IN ANSWERS
+      nextStep();
   })
   }
 
@@ -131,24 +133,21 @@ const nextStep = () => {
       console.log(typeof answers);
       switch(answers['nextStep']) {
         case "Intern":    
-            return getInternData();
+          return getInternData();
 
         case "Engineer":
-            return getEngineerData();
+          return getEngineerData();
 
         case "I'm done!":
-            console.log("Team assembled!");
+          console.log("Team assembled!");
+          console.log(teamCards);
       }
   })
 }
 
 //FUNCTION TO CREATE MANAGER CARD 
-function generateManagerCard(answers) {
-  let name = answers.name;
-  let id = answers.id;
-  let email = answers.email;
-  let officeNumber = answers.officeNumber;
-  const manager = new Manager(name, id, email, officeNumber);
+function generateManagerCard(manager) {
+
   console.log("a manager is born!")
 
   const generatedManagerHTML = `
@@ -163,11 +162,17 @@ function generateManagerCard(answers) {
   </div>
 </div>`;
   teamCards.push(generatedManagerHTML);
-  console.log(teamCards);
 }
 //FUNCTION TO CREATE INTERN CARD 
+function generateInternCard(intern) {
+  console.log("intern: ", intern.getName());
+  generatedInternHTML =  `<h5 class="card-title">${intern.getName()}</h5>`;
+  teamCards.push(generatedInternHTML);
+}
 
 //FUNCTION TO CREATE ENGINEER CARD 
+
+
 
 
 //FUNCTION TO INITIALIZE APP
