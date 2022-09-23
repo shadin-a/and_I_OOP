@@ -11,6 +11,7 @@
 
   ## DESCRIPTION
   Create a HTML of your office members with this appliciation. Members will be displayed in cards with the relevant information presented below. As of this release, you can only create one manager, interns, and engineers.
+  App Walkthrough: https://drive.google.com/file/d/1PWcS9cUHBleZSsGffiRMCsKM2OW1ejUy/view?usp=sharing
 
   ## INSTALLATION
  Before running this apllication, make sure to install Jest, Inquirer, and Node.
