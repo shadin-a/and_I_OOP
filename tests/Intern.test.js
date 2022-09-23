@@ -1,5 +1,5 @@
 const Intern = require("/Users/shadinalarab/2022 BOOTCAMP/DEVELOP_MODULE10/module10_and_I_OOP/lib/intern.js");
-const leeroy = new Intern('leeroy@jenkins.com', 9, 'leeroy', 'UW');
+const leeroy = new Intern('leeroy', 9, 'UW', 'leeroy@jenkins.com');
 
 describe("Intern", () => {
 

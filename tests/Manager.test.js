@@ -1,5 +1,5 @@
 const Manager = require("/Users/shadinalarab/2022 BOOTCAMP/DEVELOP_MODULE10/module10_and_I_OOP/lib/manager.js");
-const guava = new Manager('guava@bean.com', 5, 'guava', '101');
+const guava = new Manager('guava', 5, '101', 'guava@bean.com');
 
 
 describe("Intern", () => {
