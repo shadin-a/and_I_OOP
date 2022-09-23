@@ -98,7 +98,7 @@ const engineerQuestions = [
 const getManagerData = async () => {
 inquirer.prompt(managerQuestions)
   .then(answers => {
-    const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
+    const manager = new Manager(answers.name, answers.id, answers.officeNumber, answers.email);
     generateManagerCard(manager);
     nextStep();
 })
@@ -106,9 +106,9 @@ inquirer.prompt(managerQuestions)
 //INQUIRER PROMPT FOR INTERN
 const getInternData = () => {
   inquirer.prompt(internQuestions)
-    .then(internAnswers => {
+    .then(answers => {
       //take the data and make a card function goes here DONT FORGET TO PASS IN ANSWERS
-      const intern = new Intern(internAnswers.id, internAnswers.email, internAnswers.name, internAnswers.school);
+      const intern = new Intern(answers.name, answers.id, answers.school, answers.email);
       generateInternCard(intern)
       nextStep();
   })
@@ -120,7 +120,7 @@ const getEngineerData = () => {
     .then(answers => {
       console.log(answers);
       //take the data and make a card function here
-      const engineer = new Engineer(answers.id, answers.email, answers.name, answers.github);
+      const engineer = new Engineer(answers.name, answers.id, answers.github, answers.email);
       generateEngineerCard(engineer)
       nextStep();
   })
@@ -141,7 +141,6 @@ const nextStep = () => {
 
         case "I'm done!":
           console.log("Team assembled!");
-          console.log(teamCards);
           writeToFile('teamCards.html', teamCards.join(""));
       }
   })
@@ -150,7 +149,7 @@ const nextStep = () => {
 //FUNCTION TO CREATE MANAGER CARD 
 function generateManagerCard(manager) {
   const generatedManagerHTML = `
-  <div class="card" style="width: 18rem;">
+  <div class="card flexbox" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">${manager.getName()}</h5>
     <h6 class="card-subtitle mb-2 text-muted">${manager.getRole()}</h6>
@@ -165,7 +164,7 @@ function generateManagerCard(manager) {
 //FUNCTION TO CREATE INTERN CARD 
 function generateInternCard(intern) {
   generatedInternHTML =  `
-  <div class="card" style="width: 18rem;">
+  <div class="card flexbox" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">${intern.getName()}</h5>
     <h6 class="card-subtitle mb-2 text-muted">${intern.getRole()}</h6>
@@ -179,7 +178,7 @@ function generateInternCard(intern) {
 //FUNCTION TO CREATE ENGINEER CARD 
 function generateEngineerCard(engineer) {
   generatedEngineerHTML =  `
-  <div class="card" style="width: 18rem;">
+  <div class="card flexbox" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">${engineer.getName()}</h5>
     <h6 class="card-subtitle mb-2 text-muted">${engineer.getRole()}</h6>
