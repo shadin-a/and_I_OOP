@@ -1,9 +1,9 @@
 const { inheritInnerComments } = require('@babel/types');
 const fs = require('fs');
 const inquirer = require('inquirer');
-const Manager = require('/Users/shadinalarab/2022 BOOTCAMP/DEVELOP_MODULE10/module10_and_I_OOP/lib/manager.js');
-const Intern = require('/Users/shadinalarab/2022 BOOTCAMP/DEVELOP_MODULE10/module10_and_I_OOP/lib/intern.js');
-const Engineer = require('/Users/shadinalarab/2022 BOOTCAMP/DEVELOP_MODULE10/module10_and_I_OOP/lib/engineer.js');
+const Manager = require('./lib/manager.js');
+const Intern = require('./lib/intern.js');
+const Engineer = require('./lib/engineer.js');
 var teamCards = [];
 
 
